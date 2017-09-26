@@ -16,16 +16,28 @@
         
         <div class="container">
             <a href="../index.php">Voltar</a>
+            <p>Amigos que pediram nesse restaurante:</p>
+            <ul>
+                
+           
+            <?php
+                $id_restaurante = $_GET[restaurante];
+                foreach (consultaAmigosNoRestaurante($_SESSION[id_usuario],$id_restaurante) as $amigos) {
+                   echo "<li>$amigos[nome]</li>";
+                }
+            ?>
+            </ul>  
+           
             <div class="row">
                 <div class="col-xs-6 col-md-6">
-                    <p>Comentário</p>
+                    <p><b>Comentário </b></p>
                 </div>
                 <div class="col-xs-6 col-md-6">
-                    <p class='text-right'>Nota</p>
+                    <p class='text-right'><b>Nota </b></p>
                 </div>
             </div>
             <?php
-                $id_restaurante = $_GET[restaurante];
+                
                 foreach (consultaComentariosRestaurante($id_restaurante) as $prato) {
             ?>
                 <hr/>

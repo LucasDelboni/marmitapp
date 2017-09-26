@@ -132,4 +132,16 @@ function consultaComentariosRestaurante($id_restaurante){
     return executaQueryTodasLinhas($sql,$dados);
 }
 
+
+//////////////////////////////////AMIGOS
+function consultaAmigosNoRestaurante($id_usuario,$id_restaurante){
+    $dados= array($id_usuario,$id_restaurante);
+    $sql="SELECT id_amigo, u.nome
+        FROM amigos a
+        INNER JOIN venda ON id_amigo = id_comprador
+        LEFT JOIN comprador u ON id_amigo = u.id_usuario
+        WHERE a.id_usuario =?
+        AND id_restaurante =?";
+    return executaQueryTodasLinhas($sql,$dados);
+}
 ?>
