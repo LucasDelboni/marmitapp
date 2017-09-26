@@ -2,12 +2,11 @@
 
 function instanciaPdo(){
     $port = '3306';
-    $dbname = 'c9';
+    $dbname = 'marmitapp';
     $ip = getenv('IP');
     $user = getenv('C9_USER');
     
-    
-    $pdo = new PDO("mysql:host=$ip;port=$port;dbname=$db;charset=utf8",$user,"");
+    $pdo = new PDO("mysql:host=$ip;port=$port;dbname=$dbname;charset=utf8",$user,"");
     // define para que o PDO lance exceções caso ocorra erros
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
@@ -67,9 +66,9 @@ function consultaRestaurantes($entrega_em_casa, $entrega_meio, $come_local, $ace
     $dados = array($entrega_em_casa, $entrega_meio, $come_local,$aceita_cartao);
     $sql="SELECT id_usuario AS restaurante, nome AS nome, foto AS foto
         FROM restaurante 
-        WHERE entrega_em_casa =:?
+        WHERE entrega_em_casa =?
         AND entrega_meio =?
-        AND come_local =:?
+        AND come_local =?
         AND aceita_cartao =?";
     
     return executaQueryTodasLinhas($sql, $dados);
