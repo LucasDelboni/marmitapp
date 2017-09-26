@@ -3,29 +3,45 @@
     <head>
         <?php 
             include('includes.php'); 
-            include('queries.php');
+            include('valida_session.php');
         ?>
     </head>
     <body>
-        <div class="table-responsive">
-            <table class="table">
-                <tr>
-                    <th>Nome</th>
-                    <!-- <th>Foto</th> -->
-                </tr>
-            
-        </div>
         <?php
-            var_dump(consultaRestaurantes(true, true, true, true));
-            foreach (consultaRestaurantes(true, true, true, true) as $restaurante) {
-        ?>
-            <tr>
-                <td><?php echo $restaurante[nome]?></td>
-                <!-- <td><?php echo $restaurante[foto]?></td> -->
-            </tr>
-        <?php
+            if($_SESSION[email]  == null){
+                 header("Location: login.php"); 
             }
         ?>
-        </table>
+        
+        
+        <div class="container">
+             <a href="index.php">Voltar</a>
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Nome</th>
+                        <!-- <th>Foto</th> -->
+                        <th>Comentários</th>
+                    </tr>
+                
+            
+                <?php
+                    $restaurantes = consultaTodosRestaurantes();
+                    foreach ($restaurantes as $restaurante) {
+                ?>
+                    <tr>
+                        <td>
+                            <a href=<?php echo "/restaurante/lista_pratos.php?restaurante=$restaurante[restaurante]";?>><?php echo $restaurante[nome];?></a>
+                        </td>
+                        <!-- <td><?php echo $restaurante[foto]?></td> -->
+                        <td>
+                            <a href=<?php echo "/restaurante/lista_comentarios.php?restaurante=$restaurante[restaurante]";?>><button type="button" class="btn btn-info btn-lg glyphicon glyphicon-comment"></button></a>
+                        </td>
+                    </tr>
+                <?php
+                    }
+                ?>
+                </table>
+            </div>
     </body>
 </html>

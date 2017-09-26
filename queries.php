@@ -38,15 +38,16 @@ function executaInsercao($sql,$dados){
 ///////////////////// USUARIOS  ///////////////////////////////////
 function cadastraUsuario($email, $senha, $nome){
     $dados = array($email, $senha);
-    $sql = "INSERT INTO usuarios(id, email, senha) VALUES (?,?,?)";
+    $sql = "INSERT INTO usuarios(email, senha) VALUES (?,?)";
     
     $pdo = instanciaPdo();
+    $pdo->beginTransaction();
     $stmt = $pdo->prepare($sql);
-    $dbh->beginTransaction(); 
-    $stmt->execute($dados);
-    $dbh->commit();
     
-    $id_usuario = $dbh->lastInsertId(); ;
+    $stmt->execute($dados);
+    $pdo->commit();
+    
+    $id_usuario = $pdo->lastInsertId(); ;
     $dados = array($id_usuario, $nome);
     $sql = "INSERT INTO comprador(id_usuario, nome) VALUES (?,?)";
     $stmt = $pdo->prepare($sql);
@@ -56,9 +57,17 @@ function cadastraUsuario($email, $senha, $nome){
 function cadastrarRestaurante($id_usuario, $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entraga_fim, $aceita_cartao, $foto){
     $dados = array($id_usuario, $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entraga_fim, $aceita_cartao, $foto);
     $sql="INSERT INTO restaurante(id_usuario, nome, cnpj, come_local, entrega_meio, entrega_em_casa, aceita_cartao, foto) VALUES (?,?,?,?,?,?,?,?)";
-    executaInsercao();
+    executaInsercao($sql, $dados);
 }
 
+function login($email, $senha){
+    $dados = array($email, $senha);
+    $sql="SELECT id
+        FROM usuarios
+        WHERE email =? 
+        AND senha = ? ";
+    return executaQueryPrimeiraLinha($sql,$dados);
+}
 ///////////////////// RESTAURANTES  ////////////////////////////////
 
 //retorna todos os id do usuario(restaurante), nome e foto
@@ -70,6 +79,14 @@ function consultaRestaurantes($entrega_em_casa, $entrega_meio, $come_local, $ace
         AND entrega_meio =?
         AND come_local =?
         AND aceita_cartao =?";
+    
+    return executaQueryTodasLinhas($sql, $dados);
+}
+
+function consultaTodosRestaurantes(){
+    $dados = array();
+    $sql="SELECT id_usuario AS restaurante, nome AS nome, foto AS foto
+        FROM restaurante";
     
     return executaQueryTodasLinhas($sql, $dados);
 }
@@ -95,12 +112,15 @@ function conultaPrato($id_prato){
 ///////////////////// COMENTARIOS E NOTAS - RESTAURANTE /////////////////////////////////////
 //insere comentario e nota em um determinado restaurante()
 function insereComentarioNota($id_comprador, $id_restaurante, $comentario, $nota){
-    $dados = array($id_comprador, $id_restaurante, $comentario, $nota);
-    $sql="UPDATE  venda 
-        SET  comentario =  ?, nota =  ? 
-        WHERE  id_comprador=? and id_restaurante=?";
+    $dados = array($id_comprador, $id_restaurante, $comentario, $nota, $comentario, $nota);
     
-    $executaInsercao($sql,$dados);
+
+    $sql = 'INSERT INTO venda (id_comprador, id_restaurante, comentario, nota)
+            VALUES (?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE
+            comentario=?, nota=?';
+    
+    executaInsercao($sql,$dados);
 }
 
 //retorna todos os comentarios e notas de um restaurante
@@ -111,8 +131,5 @@ function consultaComentariosRestaurante($id_restaurante){
         WHERE id_restaurante =?";
     return executaQueryTodasLinhas($sql,$dados);
 }
-
-
-
 
 ?>

@@ -3,19 +3,20 @@
     <head>
         <?php 
             include('../includes.php'); 
-            include('../queries.php');
+            include('../valida_session.php');
         ?>
     </head>
     <body>
+        <a href="../index.php">Voltar</a>
         <div class="table-responsive container">
             <table class="table">
                 <tr>
                     <th>Nome</th>
-                    <th>Preço</th> -->
+                    <th>Preço</th>
                 </tr>
                 <?php
-                    var_dump(pratosPorRestaurante(1));
-                    foreach (pratosPorRestaurante(1) as $prato) {
+                    $id_restaurante = $_GET["restaurante"];
+                    foreach (pratosPorRestaurante($id_restaurante) as $prato) {
                 ?>
                     <tr>
                         <td><?php echo $prato[nome]?></td>

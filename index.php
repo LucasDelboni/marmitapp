@@ -2,7 +2,7 @@
     <head>
         <?php 
             include('includes.php');
-            include('queries.php')
+            include('valida_session.php');
         ?>
     </head>
     <body>
@@ -10,23 +10,50 @@
             $nome = $_POST["nome"];
             $email = $_POST["email"];
             $senha = $_POST["senha"];
-            var_dump($email);
-            var_dump($nome);
-            var_dump($senha);
-            var_dump($nome==null);
-            if($nome!=null && $email !=null && $senha!=null){
-                cadastraUsuario($email, $senha, $nome);
-                echo "usuario cadastrado com sucesso";
-            }
-            
-            if($email != null && $senha!=null){
-                $id_usuario = login($email,$senha);
-                $_SESSION[id_usuario] = $id_usuario;
-                echo "usuario logado com sucesso";
-            }
-            else{
-                header("Location: login.php"); 
+            if($_SESSION[email]  == null){
+                if($nome!=null && $email !=null && $senha!=null){
+                    cadastraUsuario($email, $senha, $nome);
+                    echo "usuario cadastrado com sucesso";
+                }
+                else{
+                    header("Location: login.php");
+                }
             }
         ?>
+        <div class="container">
+            <a href="logout.php">Sair</a>
+            <p><?= $_SESSION[email] ?></p>
+            <a href="lista_restaurantes.php">Ver restaurantes cadastrados</a>
+            <br/>
+            <a href="restaurante/cadastro_restaurante.php">Cadastrar restaurante</a>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>Nome</th>
+                        <!-- <th>Foto</th> -->
+                        <th>Comentários</th>
+                    </tr>
+                
+            
+                <?php
+                    $restaurantes = consultaTodosRestaurantes();
+                    foreach ($restaurantes as $restaurante) {
+                ?>
+                    <tr>
+                        <td>
+                            <a href=<?php echo "/restaurante/lista_pratos.php?restaurante=$restaurante[restaurante]";?>><?php echo $restaurante[nome];?></a>
+                        </td>
+                        <!-- <td><?php echo $restaurante[foto]?></td> -->
+                        <td>
+                            <a href=<?php echo "/restaurante/lista_comentarios.php?restaurante=$restaurante[restaurante]";?>><button type="button" class="btn btn-info btn-lg glyphicon glyphicon-comment"></button></a>
+                        </td>
+                    </tr>
+                <?php
+                    }
+                ?>
+                </table>
+            </div>
+        </div>
     </body>
 </html>
