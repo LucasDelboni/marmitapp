@@ -4,6 +4,7 @@
         <?php 
             include('../includes.php'); 
             include('../valida_session.php');
+            
         ?>
     </head>
     <body>
@@ -11,48 +12,53 @@
             if($_SESSION[email]  == null){
                  header("Location: ../login.php"); 
             }
+            
+            $id_restaurante = $_GET[restaurante];
         ?>
         
-        
+         
+           
         <div class="container">
-            <a href="../index.php">Voltar</a>
-            <p>Amigos que pediram nesse restaurante:</p>
-            <ul>
-                
-           
-            <?php
-                $id_restaurante = $_GET[restaurante];
-                foreach (consultaAmigosNoRestaurante($_SESSION[id_usuario],$id_restaurante) as $amigos) {
-                   echo "<li>$amigos[nome]</li>";
-                }
-            ?>
-            </ul>  
-           
-            <div class="row">
-                <div class="col-xs-6 col-md-6">
-                    <p><b>Comentário </b></p>
+            <ul class="pager">
+                <li><a href="../index.php">Voltar</a></li>
+                <li> <a href="../logout.php">Sair</a></li>
+            </ul>
+            
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                     <h3 class="panel-title">Comentários do: <?php echo consultaNomeRestaurante($id_restaurante)[nome];?></h3>
                 </div>
-                <div class="col-xs-6 col-md-6">
-                    <p class='text-right'><b>Nota </b></p>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                                <tr>
+                                    <th>Comentário</th>
+                                    <th>Nota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    foreach (consultaComentariosRestaurante($id_restaurante) as $prato) {
+                                ?>
+                                     <tr class="active">
+                                        <td>
+                                           <?php echo $prato[comentario]?>
+                                        </td>
+                                        <td>
+                                            <?php echo $prato[nota]?>
+                                        </td>
+                                    </tr>
+                                <?php
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <?php
-                
-                foreach (consultaComentariosRestaurante($id_restaurante) as $prato) {
-            ?>
-                <hr/>
-                <div class="row">
-                    <div class="col-xs-10 col-md-9">
-                        <?php echo $prato[comentario]?>
-                    </div>
-                    <div class="col-xs-2 col-md-3">
-                        <?php echo $prato[nota]?>
-                    </div>
-                </div>
-            <?php
-                }
-            ?>
-            <a href=<?php echo "/restaurante/adicionar_comentario.php?restaurante=$id_restaurante";?>>Comentar</a>
+
+            <a class="btn btn-primary" href=<?php echo "/restaurante/adicionar_comentario.php?restaurante=$id_restaurante";?>>Comentar</a>
         </div>
     </body>
 </html>

@@ -5,7 +5,7 @@
     <body>
         <div class="col-md-2 col-md-offset-5">
             <h3>Cadastrar usuário</h3>
-            <form action="/cadastro_usuario.php" method="post">
+            <form action="/index.php" method="post">
                 <div class="form-group">
                     <label>Nome completo: </label><input type="text" class="form-control" name="nome"><br>
                     <label>Email: </label><input type="text" class="form-control" name="email"><br>

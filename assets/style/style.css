@@ -1,0 +1,26 @@
+.login {
+    padding: 35px;
+}
+
+.login .form {
+    padding: 25px 0px;    
+}
+
+.login .banner {
+    text-align: center;
+}
+
+.login .banner > .text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.login .banner > .logo {
+    height: auto;
+    width: 20%;
+}
+
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+}

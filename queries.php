@@ -37,25 +37,15 @@ function executaInsercao($sql,$dados){
 
 ///////////////////// USUARIOS  ///////////////////////////////////
 function cadastraUsuario($email, $senha, $nome){
-    $dados = array($email, $senha);
-    $sql = "INSERT INTO usuarios(email, senha) VALUES (?,?)";
+    $dados = array($email, $senha, $nome);
+    $sql = "INSERT INTO usuarios(email, senha, nome) VALUES (?,?,?)";
     
-    $pdo = instanciaPdo();
-    $pdo->beginTransaction();
-    $stmt = $pdo->prepare($sql);
-    
-    $stmt->execute($dados);
-    $pdo->commit();
-    
-    $id_usuario = $pdo->lastInsertId(); ;
-    $dados = array($id_usuario, $nome);
-    $sql = "INSERT INTO comprador(id_usuario, nome) VALUES (?,?)";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($dados);
+    executaInsercao($sql, $dados);
 }
 
 function cadastrarRestaurante($id_usuario, $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entraga_fim, $aceita_cartao, $foto){
     $dados = array($id_usuario, $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entraga_fim, $aceita_cartao, $foto);
+    var_dump($dados);
     $sql="INSERT INTO restaurante(id_usuario, nome, cnpj, come_local, entrega_meio, entrega_em_casa, aceita_cartao, foto) VALUES (?,?,?,?,?,?,?,?)";
     executaInsercao($sql, $dados);
 }
@@ -89,6 +79,15 @@ function consultaTodosRestaurantes(){
         FROM restaurante";
     
     return executaQueryTodasLinhas($sql, $dados);
+}
+
+//pega infos do restaurante
+function consultaNomeRestaurante($id_restaurante){
+    $dados = array($id_restaurante);
+    $sql="SELECT nome
+        FROM restaurante
+        WHERE id_usuario =?";
+    return  executaQueryPrimeiraLinha($sql, $dados);
 }
 
 //consutla todos os pratos (não pega ingredientes) de um determinado restaurante
@@ -125,10 +124,13 @@ function insereComentarioNota($id_comprador, $id_restaurante, $comentario, $nota
 
 //retorna todos os comentarios e notas de um restaurante
 function consultaComentariosRestaurante($id_restaurante){
+    
     $dados = array($id_restaurante);
     $sql="SELECT comentario, nota
         FROM venda
-        WHERE id_restaurante =?";
+        WHERE id_restaurante =?
+        AND nota IS NOT NULL 
+        OR comentario IS NOT NULL ";
     return executaQueryTodasLinhas($sql,$dados);
 }
 
@@ -136,12 +138,12 @@ function consultaComentariosRestaurante($id_restaurante){
 //////////////////////////////////AMIGOS
 function consultaAmigosNoRestaurante($id_usuario,$id_restaurante){
     $dados= array($id_usuario,$id_restaurante);
-    $sql="SELECT id_amigo, u.nome
+    $sql="SELECT distinct id_amigo, u.nome
         FROM amigos a
         INNER JOIN venda ON id_amigo = id_comprador
-        LEFT JOIN comprador u ON id_amigo = u.id_usuario
-        WHERE a.id_usuario =?
-        AND id_restaurante =?";
+        LEFT JOIN usuarios u ON id_amigo = u.id
+        WHERE a.id_usuario = ?
+        AND id_restaurante = ?";
     return executaQueryTodasLinhas($sql,$dados);
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 include('queries.php');
+
 if (!empty($_POST[submit])) {
     session_set_cookie_params(3600);
     session_start();
@@ -17,16 +18,26 @@ if (!empty($_POST[submit])) {
     <head>
         <?php include('includes.php'); ?>
     </hed>
-    <body>
+    <body class="login">
         <div class="col-md-2 col-md-offset-5">
-            <h3>Entrar</h3>
-            <form action="/login.php" method="post">
-                <div class="form-group">
-                    <label>Email: </label><input type="text" class="form-control" name="email"><br>
-                    <label>Senha: </label><input type="password" class="form-control" name="senha"><br>
-                </div>
-                <input type="submit" class="btn btn-primary" value="Entrar" name='submit'>
-            </form>
+            <div class="banner">
+                <img src="assets/images/logo.png" class="logo"></img>
+                <span class="text">MarmitAPP</span>
+            </div>
+            <div class="form">
+                <form action="/login.php" method="POST">
+                    <div class="form-group">
+                        <label>Email: </label><input type="text" class="form-control" name="email"><br>
+                        <label>Senha: </label><input type="password" class="form-control" name="senha"><br>
+                    </div>
+                    <div class="text-center">
+                        <input type="submit" class="btn btn-primary" value="Entrar" name="submit">
+                    </div>
+                </form>
+            </div>
+            <div class="text-center">
+                <a href="cadastro_usuario.php">Cadastrar-se</a>
+            </div>
         </div>
     </body>
 </html>
