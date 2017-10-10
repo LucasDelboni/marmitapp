@@ -1,3 +1,4 @@
+
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -5,9 +6,9 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-<title>Mamitapp: Peca sua marmita em qualquer lugar pelo menor preco</title>  
+<title>Mamitapp: Peca sua marmita em qualquer lugar pelo menor preco</title> 
 <!-- For-Mobile-Apps-and-Meta-Tags -->
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -28,6 +29,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Bitter:400,400i,700&subset=latin-ext" rel="stylesheet">
 <!-- //web-fonts -->
+<?php
+	include('../queries.php');
+?>
 </head>
 <body class="bg">
 <!-- nav -->
@@ -35,7 +39,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="overlay"></div>
 		<div class="mobile-side-menu">
 			<ul>
-				<li><a href="team.html"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
+				<li><a href="team.php"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
 				<li><a href="contact.html"><i class="fa fa-envelope" aria-hidden="true"></i>Entre em contato</a></li>
 				<li><a href="index.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
 			</ul>
@@ -89,50 +93,60 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="w3layouts_breadcrumbs_left">
 				<ul>
 					<li><i class="fa fa-home" aria-hidden="true"></i><a href="main.html">Home</a><span>/</span></li>
-					<li><i class="fa fa-cutlery" aria-hidden="true"></i>Menu</li>
+					<li><i class="fa fa-users" aria-hidden="true"></i>Restaurantes</li>
 				</ul>
 			</div>
 			<div class="w3layouts_breadcrumbs_right">
-				<h3>Menu</h3>
+				<h3>Restaurantes</h3>
 			</div>
 			<div class="clearfix"> </div>
 		</div>
 	</div>
-<!-- //breadcrumbs -->
-<!-- menu -->
+
 	<div class="menu">
 		<div class="container">	
-			<div class="w3_agileits_steak">
-				<div class="w3ls_sandwich_para"><img src="images/20.jpg" alt=" " class="img-responsive" /></div>
-				<h3 class="w3l_sandwich">Pratos</h3>
-				<p class="agileits_sandwich_para">Nossos pratos sempre acompanham uma proteína.</p>
-				<div class="agileinfo_sandwiches">
-					<div class="agileinfo_sandwiches_left">
-						<div class="wthree_sandwich_grid">
-							<h4>Prato Feito 1 --- <span>R$15,00</span></h4>
-							<p>Arroz, feijão, bife e salada (alface e tomate).</p>
+			<h3 class="agileits_head w3_agileits_head">Restaurantes<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			<div class="w3_agileits_team_grids">
+				
+				<?php
+                    $restaurantes = consultaTodosRestaurantes();
+                    foreach ($restaurantes as $restaurante) {
+                ?>
+		                <div class="agile_team_grid">
+							<img src="images/4.jpg" alt=" " class="img-responsive" />
+							<h3><a href=<?php echo "/menu.php?restaurante=$restaurante[restaurante]";?>><?php echo $restaurante[nome];?></a></h3>
+							<h4><a href=<?php echo "menu.php?restaurante=$restaurante[restaurante]";?>>Veja os pratos</a></h4>
+							<h4><a href="">Veja as reviews</a></h4>
 						</div>
-						<div class="wthree_sandwich_grid">
-							<h4>Prato Feito 2 --- <span>$17,00</span></h4>
-							<p>Arroz, feijão, bife, batata-frita e salada (alface e tomate).</p>
-						</div>
-					</div>
-					<div class="agileinfo_sandwiches_right">
-						<div class="wthree_sandwich_grid">
-							<h4>Prato Feito 3 --- <span>R$13,00 </span></h4>
-							<p>Arroz, feijão, frango e salada (alface e tomate).</p>
-						</div>
-						<div class="wthree_sandwich_grid">
-							<h4>Prato Feito 4 --- <span>R$15,00 </span></h4>
-							<p>Arroz, feijão, frango, batata-frita e salada (alface e tomate).</p>
-						</div>
-					</div>
-					<div class="clearfix"> </div>
+                
+                <?php
+                    }
+                ?>
+				
+				
+				<div class="agile_team_grid">
+					<img src="images/3.jpg" alt=" " class="img-responsive" />
+					<h3>Comida caseira</h3>
+					<h4><a href="menu.html">Veja os pratos</a></h4>
+					<h4><a href="">Veja as reviews</a></h4>
 				</div>
+				<div class="agile_team_grid">
+					<img src="images/1.jpg" alt=" " class="img-responsive" />
+					<h3>Doces</h3>
+					<h4><a href="menu.html">Veja os pratos</a></h4>
+					<h4><a href="">Veja as reviews</a></h4>
+				</div>
+				<div class="agile_team_grid">
+					<img src="images/3.jpg" alt=" " class="img-responsive" />
+					<h3>Comida italiana</h3>
+					<h4><a href="menu.html">Veja os pratos</a></h4>
+					<h4><a href="">Veja as reviews</a></h4>
+				</div>
+				<div class="clearfix"> </div>
 			</div>
 		</div>
 	</div>
-<!-- //menu -->
+<!-- single -->
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
@@ -154,11 +168,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<ul class="agileits_w3layouts_footer">
 						<li><a href="menu.html">Our Menu</a></li>
 						<li><a href="blog.html">Blog</a></li>
-						<li><a href="team.html">About</a></li>
+						<li><a href="team.php">About</a></li>
 					</ul>
-				</div>
+				</div>-->
 				<div class="clearfix"> </div>
-			</div>-->
+			</div>
 			<div class="w3_agile_copyright">	
 				<p>&copy; 2017 MamitApp | Design by <a href="http://w3layouts.com/">W3layouts</a>, coded by MarmitApp</p>
 			</div>
@@ -166,4 +180,4 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 <!-- //footer -->
 </body>
-</html>
+</html>	
