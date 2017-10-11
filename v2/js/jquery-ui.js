@@ -1494,7 +1494,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 		this.cancelHelperRemoval = false;
 	},
 
-	// From now on bulk stuff - mainly helpers
+	// From now on bulk stuff - comentarioly helpers
 
 	_trigger: function(type, event, ui) {
 		ui = ui || this._uiHash();
@@ -5662,7 +5662,7 @@ $.widget( "ui.accordion", {
 	_destroy: function() {
 		var contents;
 
-		// clean up main element
+		// clean up comentario element
 		this.element
 			.removeClass( "ui-accordion ui-widget ui-helper-reset" )
 			.removeAttr( "role" );
@@ -7230,7 +7230,7 @@ var instActive;
 
 /* Date picker manager.
    Use the singleton instance of this class, $.datepicker, to interact with the date picker.
-   Settings for (groups of) date pickers are maintained in an instance object,
+   Settings for (groups of) date pickers are comentariotained in an instance object,
    allowing multiple different settings on the same page. */
 
 function Datepicker() {
@@ -7240,7 +7240,7 @@ function Datepicker() {
 	this._disabledInputs = []; // List of date picker inputs that have been disabled
 	this._datepickerShowing = false; // True if the popup picker is showing , false if not
 	this._inDialog = false; // True if showing within a "dialog", false if not
-	this._mainDivId = 'ui-datepicker-div'; // The ID of the main datepicker division
+	this._comentarioDivId = 'ui-datepicker-div'; // The ID of the comentario datepicker division
 	this._inlineClass = 'ui-datepicker-inline'; // The name of the inline marker class
 	this._appendClass = 'ui-datepicker-append'; // The name of the append marker class
 	this._triggerClass = 'ui-datepicker-trigger'; // The name of the trigger marker class
@@ -7319,7 +7319,7 @@ function Datepicker() {
 		disabled: false // The initial disabled state
 	};
 	$.extend(this._defaults, this.regional['']);
-	this.dpDiv = bindHover($('<div id="' + this._mainDivId + '" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>'));
+	this.dpDiv = bindHover($('<div id="' + this._comentarioDivId + '" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>'));
 }
 
 $.extend(Datepicker.prototype, {
@@ -7966,7 +7966,7 @@ $.extend(Datepicker.prototype, {
 			parseFloat(convert(elem.css('border-top-width')))];
 	},
 
-	/* Check positioning to remain on screen. */
+	/* Check positioning to recomentario on screen. */
 	_checkOffset: function(inst, offset, isFixed) {
 		var dpWidth = inst.dpDiv.outerWidth();
 		var dpHeight = inst.dpDiv.outerHeight();
@@ -8050,8 +8050,8 @@ $.extend(Datepicker.prototype, {
 		var $target = $(event.target),
 			inst = $.datepicker._getInst($target[0]);
 
-		if ( ( ( $target[0].id != $.datepicker._mainDivId &&
-				$target.parents('#' + $.datepicker._mainDivId).length == 0 &&
+		if ( ( ( $target[0].id != $.datepicker._comentarioDivId &&
+				$target.parents('#' + $.datepicker._comentarioDivId).length == 0 &&
 				!$target.hasClass($.datepicker.markerClassName) &&
 				!$target.closest("." + $.datepicker._triggerClass).length &&
 				$.datepicker._datepickerShowing && !($.datepicker._inDialog && $.blockUI) ) ) ||
@@ -8147,7 +8147,7 @@ $.extend(Datepicker.prototype, {
 		}
 	},
 
-	/* Update any alternate field to synchronise with the main field. */
+	/* Update any alternate field to synchronise with the comentario field. */
 	_updateAlternate: function(inst) {
 		var altField = this._get(inst, 'altField');
 		if (altField) { // update alternate field too
@@ -9412,7 +9412,7 @@ $.widget("ui.dialog", {
 					props;
 				// Default to a non-submitting button
 				props = $.extend( { type: "button" }, props );
-				// Change the context for the click callback to be the main element
+				// Change the context for the click callback to be the comentario element
 				click = props.click;
 				props.click = function() {
 					click.apply( that.element[0], arguments );
@@ -10211,7 +10211,7 @@ $.effects.effect.explode = function( o, done ) {
 			left = offset.left + j * width;
 			mx = j - ( cells - 1 ) / 2 ;
 
-			// Create a clone of the now hidden main element that will be absolute positioned
+			// Create a clone of the now hidden comentario element that will be absolute positioned
 			// within a wrapper div off the -left and -top equal to size of our pieces
 			el
 				.clone()
@@ -11323,7 +11323,7 @@ $.widget( "ui.menu", {
 			var currentMenu = all ? this.element :
 				$( event && event.target ).closest( this.element.find( ".ui-menu" ) );
 
-			// If we found no valid submenu ancestor, use the main menu to close all sub menus anyway
+			// If we found no valid submenu ancestor, use the comentario menu to close all sub menus anyway
 			if ( !currentMenu.length ) {
 				currentMenu = this.element;
 			}
@@ -13478,7 +13478,7 @@ $.widget( "ui.tabs", {
 			this.active = $();
 		// was active, but active tab is gone
 		} else if ( this.active.length && !$.contains( this.tablist[ 0 ], this.active[ 0 ] ) ) {
-			// all remaining tabs are disabled
+			// all recomentarioing tabs are disabled
 			if ( this.tabs.length === options.disabled.length ) {
 				options.active = false;
 				this.active = $();
@@ -14397,7 +14397,7 @@ if ( $.uiBackCompat !== false ) {
 
 	$.widget( "ui.tabs", $.ui.tabs, {
 		options: {
-			cookie: null // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
+			cookie: null // e.g. { expires: 7, path: '/', docomentario: 'jquery.com', secure: true }
 		},
 		_create: function() {
 			var options = this.options,

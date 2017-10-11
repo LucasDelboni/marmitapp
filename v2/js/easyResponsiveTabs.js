@@ -30,7 +30,7 @@
                 }
             });
 
-            //Main function
+            //comentario function
             this.each(function () {
                 var $respTabs = $(this);
                 var $respTabsList = $respTabs.find('ul.resp-tabs-list.' + options.tabidentify);

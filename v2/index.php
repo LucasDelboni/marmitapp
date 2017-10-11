@@ -1,3 +1,19 @@
+<?php
+include('../valida_session.php');
+
+$nome = $_POST["nome"];
+$email = $_POST["email"];
+$senha = $_POST["senha"];
+if(!isset($_SESSION[email])){
+    if($nome!=null && $email !=null && $senha!=null){
+        cadastraUsuario($email, $senha, $nome);
+        header("Location: /v2/login.php");
+    }
+    else{
+        header("Location: /v2/login.php");
+    }
+}
+?>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -5,7 +21,7 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
 <title>Mamitapp: Peca sua marmita em qualquer lugar pelo menor preco</title> 
 <!-- For-Mobile-Apps-and-Meta-Tags -->
@@ -17,7 +33,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- Custom Theme files -->
 <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 <link href="css/style.css" type="text/css" rel="stylesheet" media="all"> 
-<link rel="stylesheet" type="text/css" href="css/easy-responsive-tabs.css " />
 <!-- //Custom Theme files -->
 <!-- font-awesome-icons -->
 <link rel="stylesheet" href="css/font-awesome.min.css" />
@@ -32,23 +47,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body class="bg">
 <!-- nav -->
-	<div class="nav_main">
+	<div class="nav_comentario">
 		<div class="overlay"></div>
 		<div class="mobile-side-menu">
 			<ul>
-				<li><a href="team.php"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
+				<li><a href="lista_restaurantes.php"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
 				<li><a href="contact.html"><i class="fa fa-envelope" aria-hidden="true"></i>Entre em contato</a></li>
 				<li><a href="index.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
 			</ul>
 		</div>
 		<div class="navbar">
 			<div class="agile_container">
-				<div class="w3_agile_nav_main_left">
+				<div class="w3_agile_nav_comentario_left">
 					<div class="toggleMenu">
 						<a href="#"> Menu </a>
 					</div>
 				</div>
-				<!--<div class="w3_agile_nav_main_right">
+				<!--<div class="w3_agile_nav_comentario_right">
 					<ul class="wthree_social_icons">
 						<li><a href="#" class="w3_agileits_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 						<li><a href="#" class="w3_agileits_google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
@@ -74,7 +89,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- logo -->
 	<div class="agileinfo_logo">
 		<div class="agile_container">
-			<h1><a href="main.html"><img src="images/logo.png" class="logo"/>MarmitAPP</a></h1>
+			<h1><a href="comentario.html"><img src="images/logo.png" class="logo"/>MarmitAPP</a></h1>
 		</div>
 	</div>
 <!-- //logo -->
@@ -89,101 +104,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<div class="w3layouts_breadcrumbs_left">
 				<ul>
-					<li><i class="fa fa-home" aria-hidden="true"></i><a href="main.html">Home</a><span>/</span></li>
-					<li><i class="fa fa-sign-in" aria-hidden="true"></i>Entrar / Cadastrar-se</li>
+					<li><i class="fa fa-home" aria-hidden="true"></i><a href="comentario.html">Home</a><span>/</span></li>
+					<li><i class="fa fa-users" aria-hidden="true"></i>Restaurantes</li>
 				</ul>
 			</div>
 			<div class="w3layouts_breadcrumbs_right">
-				<h3>Entrar / Cadastrar-se</h3>
+				<h3>Restaurantes</h3>
 			</div>
 			<div class="clearfix"> </div>
 		</div>
 	</div>
-<!-- //breadcrumbs -->
-<!-- sign-in -->
+
 	<div class="menu">
 		<div class="container">	
-			<div id="parentHorizontalTab">
-				<ul class="resp-tabs-list hor_1">
-					<li>Entrar</li>
-					<li>Cadastrar-se</li>
-				</ul>
-				<div class="resp-tabs-container hor_1">
-					<div class="login-top sign-top">
-						<div class="agileits-login">
-							<form action="#" method="post">
-								<input type="email" class="email" name="Email" placeholder="Email" required=""/>
-								<input type="password" class="password" name="Password" placeholder="Senha" required=""/>
-								<div class="wthree-text"> 
-									<ul> 
-										<li>
-											<!--<label class="anim">
-												<input type="checkbox" class="checkbox">
-												<span> Remember me ?</span> -->
-											</label> 
-										</li>
-										<li> <a href="#">Esqueceu a senha?</a> </li>
-									</ul>
-									<div class="clear"> </div>
-								</div>  
-								<div class="w3ls-submit">
-									<div class="submit-text">
-										<input type="submit" value="LOGIN" style="display:none"> 
-										<a class="login-button" href="team.php" style="float: left">LOGIN</a>
-									</div>	
-								</div>	
-							</form>
-						</div> 
-					</div>
-					<div class="login-top sign-top">
-						<div class="agileits-login">
-							<form action="#" method="post">
-								<input type="text" name="Username" placeholder="Nome completo" required="">
-								<input type="email" class="email" name="Email" placeholder="Email" required=""/>
-								<input type="password" class="password" name="Password" placeholder="Senha" required=""/>	
-								<!--<label class="anim">
-									<input type="checkbox" class="checkbox">
-									<span>I accept the terms of use</span> 
-								</label> -->
-								<div class="w3ls-submit">
-									<div class="submit-text">
-										<input class="register" type="submit" value="Cadastrar">  
-									</div>	
-								</div>
-							</form> 
-						</div>  
-					</div>
-				</div>
+			<h3 class="agileits_head w3_agileits_head">Restaurantes<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			<div class="w3_agileits_team_grids">
+				
+				<?php
+                    $restaurantes = consultaTodosRestaurantes();
+                    foreach ($restaurantes as $restaurante) {
+                ?>
+		                <div class="agile_team_grid">
+							<img src=<?php echo "images/$restaurante[foto].jpg";?> alt=" " class="img-responsive" />
+							<h3><a href=<?php echo "/restaurante.php?restaurante=$restaurante[restaurante]";?>><?php echo $restaurante[nome];?></a></h3>
+							<h4><a href=<?php echo "restaurante.php?restaurante=$restaurante[restaurante]";?>>Veja os pratos</a></h4>
+							<h4><a href=<?php echo "comentario.php?restaurante=$restaurante[restaurante]";?>>Veja as reviews</a></h4>
+						</div>
+                
+                <?php
+                    }
+                ?>
+				<div class="clearfix"> </div>
 			</div>
 		</div>
 	</div>
-<!-- //sign-in -->
-<!-- js -->
-<script src="js/easyResponsiveTabs.js"></script>
-	<script type="text/javascript">
-    $(document).ready(function() {
-        //Horizontal Tab
-        $('#parentHorizontalTab').easyResponsiveTabs({
-            type: 'default', //Types: default, vertical, accordion
-            width: 'auto', //auto or any width like 600px
-            fit: true, // 100% fit in a container
-            tabidentify: 'hor_1', // The tab groups identifier
-            activate: function(event) { // Callback function if tab is switched
-                var $tab = $(this);
-                var $info = $('#nested-tabInfo');
-                var $name = $('span', $info);
-                $name.text($tab.text());
-                $info.show();
-            }
-        });
-    });
-</script>
-
-<!-- //js -->
+<!-- single -->
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
-		<!--	<div class="w3ls_footer_grid">
+			<!--<div class="w3ls_footer_grid">
 				<div class="w3ls_footer_grid_left">
 					<div class="w3ls_footer_grid_left1">
 						<h2>Follow Us</h2>
@@ -199,13 +158,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="w3ls_footer_grid_right">
 					<ul class="agileits_w3layouts_footer">
-						<li><a href="menu.html">Menu</a></li>
+						<li><a href="menu.html">Our Menu</a></li>
 						<li><a href="blog.html">Blog</a></li>
-						<li><a href="team.php">Sobre</a></li>
+						<li><a href="lista_restaurantes.php">About</a></li>
 					</ul>
-				</div>
+				</div>-->
 				<div class="clearfix"> </div>
-			</div>-->
+			</div>
 			<div class="w3_agile_copyright">	
 				<p>&copy; 2017 MamitApp | Design by <a href="http://w3layouts.com/">W3layouts</a>, coded by MarmitApp</p>
 			</div>

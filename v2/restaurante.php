@@ -36,23 +36,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 <body class="bg">
 <!-- nav -->
-	<div class="nav_main">
+	<div class="nav_comentario">
 		<div class="overlay"></div>
 		<div class="mobile-side-menu">
 			<ul>
-				<li><a href="team.php"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
+				<li><a href="lista_restaurantes.php"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
 				<li><a href="contact.html"><i class="fa fa-envelope" aria-hidden="true"></i>Entre em contato</a></li>
 				<li><a href="index.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
 			</ul>
 		</div>
 		<div class="navbar">
 			<div class="agile_container">
-				<div class="w3_agile_nav_main_left">
+				<div class="w3_agile_nav_comentario_left">
 					<div class="toggleMenu">
 						<a href="#"> Menu </a>
 					</div>
 				</div>
-				<!--<div class="w3_agile_nav_main_right">
+				<!--<div class="w3_agile_nav_comentario_right">
 					<ul class="wthree_social_icons">
 						<li><a href="#" class="w3_agileits_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 						<li><a href="#" class="w3_agileits_google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
@@ -78,7 +78,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- logo -->
 	<div class="agileinfo_logo">
 		<div class="agile_container">
-			<h1><a href="main.html"><img src="images/logo.png" class="logo"/>MarmitAPP</a></h1>
+			<h1><a href="comentario.html"><img src="images/logo.png" class="logo"/>MarmitAPP</a></h1>
 		</div>
 	</div>
 <!-- //logo -->
@@ -93,7 +93,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<div class="w3layouts_breadcrumbs_left">
 				<ul>
-					<li><i class="fa fa-home" aria-hidden="true"></i><a href="main.html">Home</a><span>/</span></li>
+					<li><i class="fa fa-home" aria-hidden="true"></i><a href="comentario.html">Home</a><span>/</span></li>
 					<li><i class="fa fa-cutlery" aria-hidden="true"></i>Menu</li>
 				</ul>
 			</div>
@@ -112,6 +112,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<h3 class="w3l_sandwich">Pratos</h3>
 				<p class="agileits_sandwich_para">Amigos que já comeram aqui: 
                 <?php
+                	var_dump($_SESSION);
                     foreach (consultaAmigosNoRestaurante(1,$id_restaurante) as $amigos) {
                        echo "$amigos[nome]    ";
                     }
@@ -123,10 +124,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     $id_restaurante = $_GET["restaurante"];
                     foreach (pratosPorRestaurante($id_restaurante) as $prato) {
                 ?>
-	                	<div class="agileinfo_sandwiches_left">
+	                	<div class="agile_team_grid">
 							<div class="wthree_sandwich_grid">
 								<h4><?php echo $prato[nome]?>--- <span>R$: <?php echo $prato[preco]?></span></h4>
-								<p>Suco direto da fruta</p>
+								<p>
+								<?php
+									$lista_ingredientes = explode(";",$prato[ingredientes]);
+									foreach ($lista_ingredientes as $ingrediente){
+										echo $ingrediente;
+										echo "<br/>";
+									}
+								?>
+								</p>
 							</div>
 							
 						</div>
@@ -165,7 +174,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<ul class="agileits_w3layouts_footer">
 						<li><a href="menu.html">Our Menu</a></li>
 						<li><a href="blog.html">Blog</a></li>
-						<li><a href="team.php">About</a></li>
+						<li><a href="lista_restaurantes.php">About</a></li>
 					</ul>
 				</div>
 				<div class="clearfix"> </div>

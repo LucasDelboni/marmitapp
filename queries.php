@@ -93,7 +93,7 @@ function consultaNomeRestaurante($id_restaurante){
 //consutla todos os pratos (não pega ingredientes) de um determinado restaurante
 function pratosPorRestaurante($id_restaurante){
     $dados = array($id_restaurante);
-    $sql="SELECT id AS id_prato, nome, foto, preco
+    $sql="SELECT id AS id_prato, nome, foto, preco, ingredientes
         FROM prato
         WHERE id_restaurante =?";
     return executaQueryTodasLinhas($sql,$dados);

@@ -45,8 +45,8 @@ p,ul li,ol li{
 .colmd{
 	margin: 2em 0 0; 
 }
-/*-- main --*/
-.main-row{
+/*-- comentario --*/
+.comentario-row{
 	height: 100%;
 	padding: 5px;
 	margin: 2em auto; 
@@ -73,7 +73,7 @@ p,ul li,ol li{
     margin: 10px auto; 
     background-size: cover;
 }
-.main-row h1 {
+.comentario-row h1 {
     text-align: center;
     font-size: 3.5em;
 	color:#cf0000;
@@ -95,7 +95,7 @@ p,ul li,ol li{
 .agileinfo_copy_right p a:hover{
     color:#212121;
 }
-/*-- //main --*/ 
+/*-- //comentario --*/ 
 /*-- menu --*/
 .mobile-side-menu {
   width: 240px;
@@ -190,7 +190,7 @@ p,ul li,ol li{
 	text-decoration:none;
 	font-family: 'Open Sans', sans-serif;
 }
-.w3_agile_nav_main_left{
+.w3_agile_nav_comentario_left{
 	float:left;
 }
 .agile_container{
@@ -224,7 +224,7 @@ p,ul li,ol li{
 .wthree_social_icons li a.w3_agileits_twitter:hover{
 	background:#1da1f2;	
 }
-.w3_agile_nav_main_right{
+.w3_agile_nav_comentario_right{
 	float:right;
 }
 .navbar {
@@ -1769,7 +1769,7 @@ h3.agileits-icons-title {
 	margin-bottom:-6px;
 }
 /*-- sign-in --*/
-/*--//main--*/
+/*--//comentario--*/
 .agileits-login {
     padding:3em;
 	padding-bottom:0;
@@ -2016,7 +2016,7 @@ input.checkbox:checked:after {
 	.agileits_banner_left {
 		width: 60%;
 	}
-	.w3_agile_nav_main_right {
+	.w3_agile_nav_comentario_right {
 		margin-top: .3em;
 	}
 	.w3_cuisine_names_left h3 {
@@ -2509,7 +2509,7 @@ input.checkbox:checked:after {
 	.toggleMenu {
 		padding: 4px 25px;
 	}
-	.w3_agile_nav_main_right {
+	.w3_agile_nav_comentario_right {
 		margin-top: 0;
 	}
 	.banner1 {
