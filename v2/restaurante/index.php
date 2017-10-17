@@ -1,0 +1,195 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Mamitapp: Peca sua marmita em qualquer lugar pelo menor preco</title> 
+    <!-- For-Mobile-Apps-and-Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Cookhouse Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, SmartPhone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //For-Mobile-Apps-and-Meta-Tags -->
+    <!-- Custom Theme files -->
+    <link href="../css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="../css/style.css" type="text/css" rel="stylesheet" media="all"> 
+    <!-- //Custom Theme files -->
+    <!-- font-awesome-icons -->
+    <link rel="stylesheet" href="../css/font-awesome.min.css" />
+    <!-- //font-awesome-icons -->
+    <!-- js -->
+    <script type='text/javascript' src='../js/jquery-2.2.3.min.js'></script>
+    <!-- //js -->
+    <!-- web-fonts -->  
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Bitter:400,400i,700&subset=latin-ext" rel="stylesheet">
+    <!-- //web-fonts -->
+    
+    <?php
+    include("../../valida_session.php");
+    
+    if (!empty($_POST[submit])) {
+        $nome_restaurante = $_POST["nome"];
+        $cnpj = $_POST["cnpj"];
+        $come_local = $_POST["come_local"] || '0';
+        $entrega_meio = $_POST[entrega_meio] || '0';
+        $entrega_fim = $_POST[entrega_fim] || '0';
+        $aceita_cartao = $_POST[aceita_cartao] || '0';
+
+        if(isset($nome_restaurante) && 
+            isset($come_local)  && 
+            isset($entrega_meio) && 
+            isset($entrega_fim) &&
+            isset($aceita_cartao) ){
+                cadastrarRestaurante($_SESSION[id_usuario], $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entrega_fim, $aceita_cartao, null);
+                header("Location: /v2/restaurante/criar_prato.php");
+        }
+    }
+    
+    if(temRestaurante($_SESSION[id_usuario])){
+        header("Location: /v2/restaurante/criar_prato.php");
+    }
+    
+    $cnpj = $_POST[cnpj];
+    $nome = $_POST["nome"];
+    $email = $_POST["email"];
+    $senha = $_POST["senha"];
+    if(!isset($_SESSION[email])){
+        if($nome!=null && $email !=null && $senha!=null){
+            cadastraUsuario($email, $senha, $nome);
+            
+        }
+        else{
+            header("Location: /v2/login.php");
+        }
+    }
+    ?>
+</head>
+<body class="bg">
+	<?php 
+		include("../menu.php");
+	?>
+<!-- logo -->
+	<div class="agileinfo_logo">
+		<div class="agile_container">
+			<h1><a href="#"><img src="images/logo.png" class="logo"/>MarmitAPP</a></h1>
+		</div>
+	</div>
+<!-- //logo -->
+<!-- banner1 -->
+	<div class="banner1">
+		<div class="container">
+		</div>
+	</div>
+<!-- //banner1 -->
+<!-- breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="w3layouts_breadcrumbs_left">
+				<ul>
+					<li><i class="fa fa-home" aria-hidden="true"></i><a href="index.php">Home</a><span>/</span></li>
+					<li><i class="fa fa-users" aria-hidden="true"></i>Restaurantes</li>
+				</ul>
+			</div>
+			<div class="w3layouts_breadcrumbs_right">
+				<h3>Restaurantes</h3>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+
+	<div class="menu">
+		<div class="container">	
+			<h3 class="agileits_head w3_agileits_head">Criar seu restaurante<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			
+			
+			
+			<form class="form-horizontal" action="index.php" method="post">
+                <fieldset>
+                    <legend>Cadastrar restaurante</legend>
+                    <div class="form-group">
+                        <label for="nome" class="col-lg-2 control-label">Nome do restaurante: </label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="RESTAURANTE PONTO COM">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cnpj" class="col-lg-2 control-label">Cnpj: </label>
+                        <div class="col-lg-10">
+                            <input type="number" class="form-control" id="cnpj" name="cnpj" placeholder="85834723000149">
+                        </div>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="come_local" value="1">Pode comer no local
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="entrega_meio" value="1">Pode entregar em algum outro lugar
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="entrega_fim" value="1">Pode entregar na casa
+                        </label>
+                    </div>
+                    
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="aceita_cartao" value="1">Aceita cartão<br>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button value="Cadastrar" name='submit' type="submit" class="btn btn-primary">Cadastrar</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            
+            
+		</div>
+	</div>
+<!-- single -->
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<!--<div class="w3ls_footer_grid">
+				<div class="w3ls_footer_grid_left">
+					<div class="w3ls_footer_grid_left1">
+						<h2>Follow Us</h2>
+						<div class="w3ls_footer_grid_left1_pos">
+							<ul>
+								<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a></li>
+								<li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
+								<li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i>Google+</a></li>
+								<li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="w3ls_footer_grid_right">
+					<ul class="agileits_w3layouts_footer">
+						<li><a href="menu.html">Our Menu</a></li>
+						<li><a href="blog.html">Blog</a></li>
+						<li><a href="lista_restaurantes.php">About</a></li>
+					</ul>
+				</div>-->
+				<div class="clearfix"> </div>
+			</div>
+			<div class="w3_agile_copyright">	
+				<p>&copy; 2017 MamitApp | Design by <a href="http://w3layouts.com/">W3layouts</a>, coded by MarmitApp</p>
+			</div>
+		</div>
+	</div>
+<!-- //footer -->
+</body>
+</html>	

@@ -59,6 +59,25 @@ function login($email, $senha){
     return executaQueryPrimeiraLinha($sql,$dados);
 }
 ///////////////////// RESTAURANTES  ////////////////////////////////
+//cria um prato pro restaurante
+function criaPratoRestaurante($id_usuario, $nomePrato,$foto, $ingrediente, $preco ){
+    $dados = array($id_usuario, $nomePrato,$foto, $ingrediente, $preco) ;
+    $sql = "INSERT INTO prato(id_restaurante, nome, foto, ingredientes, preco) VALUES (?,?,?,?,?)";
+    executaInsercao($sql,$dados);
+}
+
+//checa se o usuario tem restaurante
+function temRestaurante($id_usuario){
+    $dados = array($id_usuario);
+    $sql = "SELECT id_usuario 
+            FROM restaurante
+            WHERE id_usuario =?";
+    if(executaQueryPrimeiraLinha($sql,$dados)){
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //retorna todos os id do usuario(restaurante), nome e foto
 function consultaRestaurantes($entrega_em_casa, $entrega_meio, $come_local, $aceita_cartao){
@@ -111,11 +130,13 @@ function conultaPrato($id_prato){
 ///////////////////// COMENTARIOS E NOTAS - RESTAURANTE /////////////////////////////////////
 //insere comentario e nota em um determinado restaurante()
 function insereComentarioNota($id_comprador, $id_restaurante, $comentario, $nota){
-    $dados = array($id_comprador, $id_restaurante, $comentario, $nota, $comentario, $nota);
+    $data = date("yyyy/mm/dd");
+    var_dump($data);
+    $dados = array($id_comprador, $id_restaurante, $comentario, $nota, $comentario, $nota, $data);
     
 
-    $sql = 'INSERT INTO venda (id_comprador, id_restaurante, comentario, nota)
-            VALUES (?, ?, ?, ?)
+    $sql = 'INSERT INTO comentario_restaurante (id_comprador, id_restaurante, comentario, nota, data)
+            VALUES (?, ?, ?, ?, ?)
             ON DUPLICATE KEY UPDATE
             comentario=?, nota=?';
     
@@ -126,11 +147,9 @@ function insereComentarioNota($id_comprador, $id_restaurante, $comentario, $nota
 function consultaComentariosRestaurante($id_restaurante){
     
     $dados = array($id_restaurante);
-    $sql="SELECT comentario, nota
-        FROM venda
-        WHERE id_restaurante =?
-        AND nota IS NOT NULL 
-        OR comentario IS NOT NULL ";
+    $sql="SELECT comentario, nota, data
+        FROM comentario_restaurante
+        WHERE id_restaurante =?";
     return executaQueryTodasLinhas($sql,$dados);
 }
 

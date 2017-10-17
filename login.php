@@ -1,5 +1,5 @@
 <?php
-include('queries.php');
+/*include('queries.php');
 
 if (!empty($_POST[submit])) {
     session_set_cookie_params(3600);
@@ -11,7 +11,7 @@ if (!empty($_POST[submit])) {
         $_SESSION[senha] = $_POST[senha];
         header("Location: /");
     }
-}
+}*/
 ?>
 
 <html>
@@ -24,6 +24,7 @@ if (!empty($_POST[submit])) {
                 <img src="assets/images/logo.png" class="logo"></img>
                 <span class="text">MarmitAPP</span>
             </div>
+            <?php var_dump($_POST);?>
             <div class="form">
                 <form action="/login.php" method="POST">
                     <div class="form-group">

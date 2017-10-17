@@ -13,6 +13,7 @@ print_r($data, true);
 
 if(!(empty($email_usuario) OR empty($senha_usuario))){
     if(isset($data[id])){
+        $_SESSION[id_usuario]=$data[id];
         // echo 'logado';
     } else {
         session_unset();

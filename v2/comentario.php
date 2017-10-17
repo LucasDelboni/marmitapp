@@ -31,59 +31,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="//fonts.googleapis.com/css?family=Bitter:400,400i,700&subset=latin-ext" rel="stylesheet">
 <!-- //web-fonts -->
 <?php
-	include('../queries.php');
+include('../valida_session.php');
+$id_restaurante= $_GET[restaurante];
+
+
 ?>
 </head>
 <body class="bg">
-<!-- nav -->
-	<div class="nav_comentario">
-		<div class="overlay"></div>
-		<div class="mobile-side-menu">
-			<ul>
-				<li class="active"><a href="comentario.html"><i class="fa fa-home" aria-hidden="true"></i>Home</a></li>
-				<li><a href="menu.html"><i class="fa fa-compass" aria-hidden="true"></i>Our Food</a></li>
-				<li><a href="blog.html"><i class="fa fa-picture-o" aria-hidden="true"></i>Blog</a></li>
-				<li><a href="lista_restaurantes.php"><i class="fa fa-users" aria-hidden="true"></i>Our Chef</a></li>
-				<li><a href="short-codes.html"><i class="fa fa-dashcube" aria-hidden="true"></i>Short Codes</a></li>
-				<li><a href="icons.html"><i class="fa fa-random" aria-hidden="true"></i>Web Icons</a></li>
-				<li><a href="contact.html"><i class="fa fa-map-marker" aria-hidden="true"></i>Location</a></li>
-				<li><a href="sign-in.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-			</ul>
-		</div>
-		<div class="navbar">
-			<div class="agile_container">
-				<div class="w3_agile_nav_comentario_left">
-					<div class="toggleMenu">
-						<a href="#"> Menu </a>
-					</div>
-				</div>
-				<div class="w3_agile_nav_comentario_right">
-					<ul class="wthree_social_icons">
-						<li><a href="#" class="w3_agileits_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="w3_agileits_google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="w3_agileits_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="js/slide-from-top.js"></script> 
-	<script type="text/javascript">
-      $(document).ready(function() {
-         $('.mobile-side-menu').slideFromTop({
-            menuBtn: $('.toggleMenu'),
-            navbar: $('.navbar'),
-            menuSpeed: 500,
-            bodyOverlay: $('.overlay')
-         });
-      });
-    </script>
-<!-- //nav -->
+	
+	
+	<?php 
+		include("menu.php");
+	?>
+	
 <!-- logo -->
 	<div class="agileinfo_logo">
 		<div class="agile_container">
-			<h1><a href="comentario.html">Cookhouse<span>Restaurant</span></a></h1>
+			<h1><a href="#"><img src="images/logo.png" class="logo"/>MarmitAPP</a></h1>
 		</div>
 	</div>
 <!-- //logo -->
@@ -103,6 +67,22 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 	</div>
 <!-- //banner -->
+<!-- breadcrumbs -->
+	<div class="breadcrumbs">
+		<div class="container">
+			<div class="w3layouts_breadcrumbs_left">
+				<ul>
+					<li><i class="fa fa-home" aria-hidden="true"></i><a href="index.php">Home</a><span>/</span></li>
+					<li><i class="fa fa-cutlery" aria-hidden="true"></i>Reviews</li>
+				</ul>
+			</div>
+			<div class="w3layouts_breadcrumbs_right">
+				<h3>Menu</h3>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+<!-- //breadcrumbs -->
 <!-- banner-bottom -->
 	<div class="banner-bottom">
 		<div class="container">
@@ -188,6 +168,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</thead>
 					<tbody>
 						<?php
+						var_dump($id_restaurante);
+						var_dump(consultaComentariosRestaurante($id_restaurante));
                             foreach (consultaComentariosRestaurante($id_restaurante) as $prato) {
                         ?>
                              <tr>
@@ -204,34 +186,45 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</tbody>
 				</table>				
 			</div>
+			
+			<?php
+				echo "insere?";
+				var_dump($_SESSION[id_usuario]);
+				var_dump($_POST[nota]);
+				var_dump($_POST[comentario]);
+				if (!empty($_POST[nota])) {
+					echo "vai inserir comentario";
+					$comentario = $_POST[comentario];
+					$nota=$_POST[nota];
+					insereComentarioNota($_SESSION[id_usuario], $id_restaurante, $comentario, $nota);
+				}
+				echo "nompe";
+				var_dump($id_restaurante);
+			?>
+			<form method="POST" action=<?php echo "comentario.php?restaurante=$id_restaurante";?>>
+				<h3 class="bars">O que você achou desse restaurante? </h3>
+				<div class="input-group">
+					<span class="input-group-addon" id="comentario">Comentário: </span>
+					<input type="text" name="comentario" class="form-control" placeholder="Comentário" aria-describedby="comentario">
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon" id="nota">Nota: </span>
+					<input type="text" name="nota" class="form-control" placeholder="4.5" aria-describedby="nota">
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button class="btn btn-default" name="submit" type="button submit">Enviar comentário!</button>
+						</span>
+					</div><!-- /input-group -->
+				</div><!-- /.row -->
+			</form>
 		</div>
 	</div>
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
-			<div class="w3ls_footer_grid">
-				<div class="w3ls_footer_grid_left">
-					<div class="w3ls_footer_grid_left1">
-						<h2>Follow Us</h2>
-						<div class="w3ls_footer_grid_left1_pos">
-							<ul>
-								<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a></li>
-								<li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
-								<li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i>Google+</a></li>
-								<li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="w3ls_footer_grid_right">
-					<ul class="agileits_w3layouts_footer">
-						<li><a href="menu.html">Our Menu</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="lista_restaurantes.php">About</a></li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
 			<div class="w3_agile_copyright">	
 				<p>&copy; 2016 Cookhouse. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
 			</div>

@@ -35,46 +35,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 ?>
 </head>
 <body class="bg">
-<!-- nav -->
-	<div class="nav_comentario">
-		<div class="overlay"></div>
-		<div class="mobile-side-menu">
-			<ul>
-				<li><a href="lista_restaurantes.php"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
-				<li><a href="contact.html"><i class="fa fa-envelope" aria-hidden="true"></i>Entre em contato</a></li>
-				<li><a href="index.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
-			</ul>
-		</div>
-		<div class="navbar">
-			<div class="agile_container">
-				<div class="w3_agile_nav_comentario_left">
-					<div class="toggleMenu">
-						<a href="#"> Menu </a>
-					</div>
-				</div>
-				<!--<div class="w3_agile_nav_comentario_right">
-					<ul class="wthree_social_icons">
-						<li><a href="#" class="w3_agileits_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="w3_agileits_google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="w3_agileits_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>-->
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="js/slide-from-top.js"></script> 
-	<script type="text/javascript">
-      $(document).ready(function() {
-         $('.mobile-side-menu').slideFromTop({
-            menuBtn: $('.toggleMenu'),
-            navbar: $('.navbar'),
-            menuSpeed: 500,
-            bodyOverlay: $('.overlay')
-         });
-      });
-    </script>
-<!-- //nav -->
+	<?php 
+		include("menu.php");
+	?>
 <!-- logo -->
 	<div class="agileinfo_logo">
 		<div class="agile_container">
@@ -93,8 +56,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="container">
 			<div class="w3layouts_breadcrumbs_left">
 				<ul>
-					<li><i class="fa fa-home" aria-hidden="true"></i><a href="comentario.html">Home</a><span>/</span></li>
-					<li><i class="fa fa-cutlery" aria-hidden="true"></i>Menu</li>
+					<li><i class="fa fa-home" aria-hidden="true"></i><a href="index.php">Home</a><span>/</span></li>
+					<li><i class="fa fa-cutlery" aria-hidden="true"></i>Pratos</li>
 				</ul>
 			</div>
 			<div class="w3layouts_breadcrumbs_right">
@@ -112,7 +75,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<h3 class="w3l_sandwich">Pratos</h3>
 				<p class="agileits_sandwich_para">Amigos que já comeram aqui: 
                 <?php
-                	var_dump($_SESSION);
                     foreach (consultaAmigosNoRestaurante(1,$id_restaurante) as $amigos) {
                        echo "$amigos[nome]    ";
                     }

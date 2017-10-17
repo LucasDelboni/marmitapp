@@ -36,57 +36,16 @@ if (!empty($_POST[submit])) {
     session_set_cookie_params(3600);
     session_start();
     $resposta = login($_POST[email], $_POST[password]);
-    var_dump($resposta);
     if(isset($resposta)){
         $_SESSION[id_usuario] = $resposta[id];
         $_SESSION[email] = $_POST[email];
         $_SESSION[senha] = $_POST[password];
-        header("Location: /v2/");
+        header("Location: /v2/index.php");
     }
 }
 ?>
 </head>
 <body class="bg">
-<!-- nav -->
-	<div class="nav_comentario">
-		<div class="overlay"></div>
-		<div class="mobile-side-menu">
-			<ul>
-				<li><a href="lista_restaurantes.php"><i class="fa fa-cutlery" aria-hidden="true"></i>Restaurantes</a></li>
-				<li><a href="contact.html"><i class="fa fa-envelope" aria-hidden="true"></i>Entre em contato</a></li>
-				<li><a href="index.html"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
-			</ul>
-		</div>
-		<div class="navbar">
-			<div class="agile_container">
-				<div class="w3_agile_nav_comentario_left">
-					<div class="toggleMenu">
-						<a href="#"> Menu </a>
-					</div>
-				</div>
-				<!--<div class="w3_agile_nav_comentario_right">
-					<ul class="wthree_social_icons">
-						<li><a href="#" class="w3_agileits_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="w3_agileits_google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-						<li><a href="#" class="w3_agileits_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-					</ul>
-				</div>-->
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript" src="js/slide-from-top.js"></script> 
-	<script type="text/javascript">
-      $(document).ready(function() {
-         $('.mobile-side-menu').slideFromTop({
-            menuBtn: $('.toggleMenu'),
-            navbar: $('.navbar'),
-            menuSpeed: 500,
-            bodyOverlay: $('.overlay')
-         });
-      });
-    </script>
-<!-- //nav -->
 <!-- logo -->
 	<div class="agileinfo_logo">
 		<div class="agile_container">
@@ -122,29 +81,24 @@ if (!empty($_POST[submit])) {
 			<div id="parentHorizontalTab">
 				<ul class="resp-tabs-list hor_1">
 					<li>Entrar</li>
-					<?php var_dump($_SESSION[email]);?>
-					<?php var_dump($_POST);?>
-					<?php
-						
-					?>
 					<li>Cadastrar-se</li>
 				</ul>
 				<div class="resp-tabs-container hor_1">
 					<div class="login-top sign-top">
 						<div class="agileits-login">
-							<form action="login.php" method="POST">
+							<form action="login.php" method="post">
 								<input type="email" class="email" name="email" placeholder="Email" required=""/>
 								<input type="password" class="password" name="password" placeholder="Senha" required=""/>
 								<div class="wthree-text"> 
-									<ul> 
+									<!--<ul> 
 										<li>
-											<!--<label class="anim">
+											<label class="anim">
 												<input type="checkbox" class="checkbox">
-												<span> Remember me ?</span> -->
+												<span> Remember me ?</span> 
 											</label> 
 										</li>
 										<li> <a href="#">Esqueceu a senha?</a> </li>
-									</ul>
+									</ul>-->
 									<div class="clear"> </div>
 								</div>  
 								<div class="w3ls-submit">
@@ -158,7 +112,7 @@ if (!empty($_POST[submit])) {
 					</div>
 					<div class="login-top sign-top">
 						<div class="agileits-login">
-							<form action="/index.php" method="post">
+							<form action="index.php" method="post">
 								<input type="text" name="nome" placeholder="Nome completo" required="">
 								<input type="email" class="email" name="email" placeholder="Email" required=""/>
 								<input type="password" class="password" name="senha" placeholder="Senha" required=""/>	
@@ -204,29 +158,6 @@ if (!empty($_POST[submit])) {
 <!-- footer -->
 	<div class="footer">
 		<div class="container">
-		<!--	<div class="w3ls_footer_grid">
-				<div class="w3ls_footer_grid_left">
-					<div class="w3ls_footer_grid_left1">
-						<h2>Follow Us</h2>
-						<div class="w3ls_footer_grid_left1_pos">
-							<ul>
-								<li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i>Facebook</a></li>
-								<li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i>Twitter</a></li>
-								<li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i>Google+</a></li>
-								<li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i>Instagram</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="w3ls_footer_grid_right">
-					<ul class="agileits_w3layouts_footer">
-						<li><a href="menu.html">Menu</a></li>
-						<li><a href="blog.html">Blog</a></li>
-						<li><a href="lista_restaurantes.php">Sobre</a></li>
-					</ul>
-				</div>
-				<div class="clearfix"> </div>
-			</div>-->
 			<div class="w3_agile_copyright">	
 				<p>&copy; 2017 MamitApp | Design by <a href="http://w3layouts.com/">W3layouts</a>, coded by MarmitApp</p>
 			</div>
