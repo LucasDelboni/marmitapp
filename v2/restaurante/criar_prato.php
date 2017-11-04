@@ -87,9 +87,36 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 
 	<div class="menu">
-		<div class="container">	
-			<h3 class="agileits_head w3_agileits_head">Criar seu restaurante<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
-			<form class="form-horizontal" action="index.php" method="post">
+		<div class="container">
+		    <h3 class="agileits_head w3_agileits_head">Seus pratos<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			<div class="agileinfo_sandwiches">
+				<?php
+                    $id_restaurante = $_GET["restaurante"];
+                    foreach (pratosPorRestaurante($id_usuario) as $prato) {
+                ?>
+                    	<div class="agile_team_grid">
+    						<div class="wthree_sandwich_grid">
+    							<h4><?php echo $prato[nome]?>--- <span>R$: <?php echo $prato[preco]?></span></h4>
+    							<p>
+    							<?php
+    								$lista_ingredientes = explode(";",$prato[ingredientes]);
+    								foreach ($lista_ingredientes as $ingrediente){
+    									echo $ingrediente;
+    									echo "<br/>";
+    								}
+    							?>
+    							</p>
+    						</div>
+							
+						</div>
+                <?php
+                    }
+                ?>
+				<div class="clearfix"> </div>
+			</div>
+			
+			<h3 class="agileits_head w3_agileits_head">Crie um novo prato<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			<form class="form-horizontal" action="criar_prato.php" method="post">
                 <fieldset>
                     <legend>Criar novo prato</legend>
                     <div class="form-group">

@@ -34,7 +34,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/slide-from-top.js"></script> 
+	<script type="text/javascript" src="/v2/js/slide-from-top.js"></script> 
 	<script type="text/javascript">
       $(document).ready(function() {
          $('.mobile-side-menu').slideFromTop({

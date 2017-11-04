@@ -4,9 +4,11 @@ include('../valida_session.php');
 $nome = $_POST["nome"];
 $email = $_POST["email"];
 $senha = $_POST["senha"];
+$fbId = $_POST["fbId"];
 if(!isset($_SESSION["email"])){
-    if($nome!=null && $email !=null && $senha!=null){
-        cadastraUsuario($email, $senha, $nome);
+	//faz cadastro
+    if($nome!=null && ($fbId!=null || ($senha!=null && $email))){
+        cadastraUsuario($email, $senha, $nome, $fbId);
         //header("Location: /v2/index.php");
     }
     else{

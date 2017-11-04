@@ -36,10 +36,27 @@ function executaInsercao($sql,$dados){
 }
 
 ///////////////////// USUARIOS  ///////////////////////////////////
-function cadastraUsuario($email, $senha, $nome){
-    $dados = array($email, $senha, $nome);
-    $sql = "INSERT INTO usuarios(email, senha, nome) VALUES (?,?,?)";
-    
+function cadastraUsuario($email, $senha, $nome, $fbId){
+    //cadastro do site
+    if($enha!=null){
+        $dados = array($email, $senha, $nome);
+        $sql = "INSERT INTO usuarios(email, senha, nome) VALUES (?,?,?)";
+    }
+    //cadastro do fb
+    else{
+        if(procuraFbId($fbId)){
+            return;
+        }
+        
+        if($email!=null){
+            $dados = array($email, $nome, $fbId);
+            $sql = "INSERT INTO usuarios(email, nome, fbId) VALUES (?,?,?)";
+        }
+        else{
+            $dados = array($nome, $fbId);
+            $sql = "INSERT INTO usuarios(nome, fbId) VALUES (?,?,?)";
+        }
+    }
     executaInsercao($sql, $dados);
 }
 
@@ -165,4 +182,20 @@ function consultaAmigosNoRestaurante($id_usuario,$id_restaurante){
         AND id_restaurante = ?";
     return executaQueryTodasLinhas($sql,$dados);
 }
+
+function procuraFbId($fbId){
+    $dados= array($fbId);
+    $sql = "SELECT * FROM usuarios WHERE fbId = ?";
+    if(executaQueryPrimeiraLinha($sql,$dados)){
+        return true;
+    } else {
+        return false;
+    }
+    
+}
+
+
+
+
+
 ?>

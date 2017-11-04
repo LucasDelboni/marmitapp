@@ -25,4 +25,7 @@ if(!(empty($email_usuario) OR empty($senha_usuario))){
 	session_destroy();
 }
 
+
+
 ?>
+

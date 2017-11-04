@@ -168,8 +168,6 @@ $id_restaurante= $_GET[restaurante];
 					</thead>
 					<tbody>
 						<?php
-						var_dump($id_restaurante);
-						var_dump(consultaComentariosRestaurante($id_restaurante));
                             foreach (consultaComentariosRestaurante($id_restaurante) as $prato) {
                         ?>
                              <tr>
@@ -188,18 +186,13 @@ $id_restaurante= $_GET[restaurante];
 			</div>
 			
 			<?php
-				echo "insere?";
-				var_dump($_SESSION[id_usuario]);
-				var_dump($_POST[nota]);
-				var_dump($_POST[comentario]);
 				if (!empty($_POST[nota])) {
 					echo "vai inserir comentario";
 					$comentario = $_POST[comentario];
 					$nota=$_POST[nota];
 					insereComentarioNota($_SESSION[id_usuario], $id_restaurante, $comentario, $nota);
 				}
-				echo "nompe";
-				var_dump($id_restaurante);
+
 			?>
 			<form method="POST" action=<?php echo "comentario.php?restaurante=$id_restaurante";?>>
 				<h3 class="bars">O que você achou desse restaurante? </h3>

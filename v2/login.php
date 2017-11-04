@@ -53,12 +53,11 @@ if (!empty($_POST[submit])) {
 		</div>
 	</div>
 <!-- //logo -->
-<!-- banner1 -->
-	<div class="banner1">
-		<div class="container">
-		</div>
-	</div>
-<!-- //banner1 -->
+
+
+
+
+
 <!-- breadcrumbs -->
 	<div class="breadcrumbs">
 		<div class="container">
@@ -103,10 +102,13 @@ if (!empty($_POST[submit])) {
 								</div>  
 								<div class="w3ls-submit">
 									<div class="submit-text">
-										<input type="submit" value="Entrar" name="submit"> 
-										<!-- <a class="login-button" href="lista_restaurantes.php" style="float: left">LOGIN</a> -->
-									</div>	
-								</div>	
+										<?php include("facebook.html"); ?>
+										<div id="status"></div>
+										<input type="submit" value="Entrar" name="submit">
+									</div>
+									
+								</div>
+								
 							</form>
 						</div> 
 					</div>
