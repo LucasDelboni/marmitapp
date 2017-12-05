@@ -16,6 +16,56 @@ if(!isset($_SESSION["email"])){
     }
 }
 ?>
+
+<?php 
+	echo "
+	<script>
+	
+		 window.fbAsyncInit = function() {
+		  FB.init({
+		    appId      : '266292053894169',
+		    cookie     : true,  // enable cookies to allow the server to access 
+		                        // the session
+		    xfbml      : true,  // parse social plugins on this page
+		    version    : 'v2.10' // use graph api version 2.10
+		  });
+		  
+		   FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		  });
+		  
+		 };
+		 
+		 function statusChangeCallback(response) {
+		    console.log('statusChangeCallback');
+		    console.log(response);
+		    // The response object is returned with a status field that lets the
+		    // app know the current login status of the person.
+		    // Full docs on the response object can be found in the documentation
+		    // for FB.getLoginStatus().
+		    if (response.status === 'connected') {
+		      // Logged into your app and Facebook.
+		      friends();
+		    } else {
+		      // The person is not logged into your app or we are unable to tell.
+		      document.getElementById('status').innerHTML = 'Please log ' +
+		        'into this app.';
+		    }
+		  }
+  
+		console.log('teste');
+		
+		function friends(){
+			FB.api('/me/friends', function(response){
+				console.log('teste');
+			    console.log(response);
+			}, {scope: 'user_friends'});
+		}
+	</script>";
+?>
+	
+
+
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com

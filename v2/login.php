@@ -102,7 +102,6 @@ if (!empty($_POST[submit])) {
 								</div>  
 								<div class="w3ls-submit">
 									<div class="submit-text">
-										<?php include("facebook.html"); ?>
 										<div id="status"></div>
 										<input type="submit" value="Entrar" name="submit">
 									</div>

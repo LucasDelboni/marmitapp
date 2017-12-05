@@ -85,46 +85,7 @@ $id_restaurante= $_GET[restaurante];
 <!-- //breadcrumbs -->
 <!-- banner-bottom -->
 	<div class="banner-bottom">
-		<div class="container">
-			<h3>Menu</h3>
-		</div>
-		<ul id="flexiselDemo1">	
-			<li>
-				<div class="w3layouts_banner_bottom_left">
-					<img src="images/1.jpg" alt=" " class="img-responsive" />
-					<h4>Dessert --- <span>$5</span></h4>
-					<p>Morbi eu justo suscipit.</p>
-				</div>
-			</li>
-			<li>
-				<div class="w3layouts_banner_bottom_left">
-					<img src="images/2.jpg" alt=" " class="img-responsive" />
-					<h4>Burger Cheese --- <span>$6</span></h4>
-					<p>Morbi eu justo suscipit.</p>
-				</div>
-			</li>
-			<li>
-				<div class="w3layouts_banner_bottom_left">
-					<img src="images/3.jpg" alt=" " class="img-responsive" />
-					<h4>Pasta --- <span>$3</span></h4>
-					<p>Morbi eu justo suscipit.</p>
-				</div>
-			</li>
-			<li>
-				<div class="w3layouts_banner_bottom_left">
-					<img src="images/4.jpg" alt=" " class="img-responsive" />
-					<h4>Western Cuisine --- <span>$8</span></h4>
-					<p>Morbi eu justo suscipit.</p>
-				</div>
-			</li>
-			<li>
-				<div class="w3layouts_banner_bottom_left">
-					<img src="images/5.jpg" alt=" " class="img-responsive" />
-					<h4>Asian Cuisine --- <span>$3</span></h4>
-					<p>Morbi eu justo suscipit.</p>
-				</div>
-			</li>
-		</ul>
+		
 		<script type="text/javascript">
 			$(window).load(function() {
 				$("#flexiselDemo1").flexisel({
