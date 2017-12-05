@@ -38,7 +38,7 @@ function executaInsercao($sql,$dados){
 ///////////////////// USUARIOS  ///////////////////////////////////
 function cadastraUsuario($email, $senha, $nome, $fbId){
     //cadastro do site
-    if($enha!=null){
+    if($senha!=null){
         $dados = array($email, $senha, $nome);
         $sql = "INSERT INTO usuarios(email, senha, nome) VALUES (?,?,?)";
     }
@@ -62,7 +62,6 @@ function cadastraUsuario($email, $senha, $nome, $fbId){
 
 function cadastrarRestaurante($id_usuario, $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entraga_fim, $aceita_cartao, $foto){
     $dados = array($id_usuario, $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entraga_fim, $aceita_cartao, $foto);
-    var_dump($dados);
     $sql="INSERT INTO restaurante(id_usuario, nome, cnpj, come_local, entrega_meio, entrega_em_casa, aceita_cartao, foto) VALUES (?,?,?,?,?,?,?,?)";
     executaInsercao($sql, $dados);
 }
@@ -148,7 +147,6 @@ function conultaPrato($id_prato){
 //insere comentario e nota em um determinado restaurante()
 function insereComentarioNota($id_comprador, $id_restaurante, $comentario, $nota){
     $data = date("yyyy/mm/dd");
-    var_dump($data);
     $dados = array($id_comprador, $id_restaurante, $comentario, $nota, $comentario, $nota, $data);
     
 

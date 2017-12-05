@@ -30,53 +30,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- //web-fonts -->
     
     <?php
-    include("../../valida_session.php");
+    include("../valida_session.php");
+    $id_usuario = $_SESSION[id_usuario];
     
     if (!empty($_POST[submit])) {
-        $nome_restaurante = $_POST["nome"];
-        $cnpj = $_POST["cnpj"];
-        $come_local = $_POST["come_local"] || '0';
-        $entrega_meio = $_POST[entrega_meio] || '0';
-        $entrega_fim = $_POST[entrega_fim] || '0';
-        $aceita_cartao = $_POST[aceita_cartao] || '0';
-
-        if(isset($nome_restaurante) && 
-            isset($come_local)  && 
-            isset($entrega_meio) && 
-            isset($entrega_fim) &&
-            isset($aceita_cartao) ){
-                cadastrarRestaurante($_SESSION[id_usuario], $nome_restaurante, $cnpj, $come_local, $entrega_meio, $entrega_fim, $aceita_cartao, null);
-                header("Location: /v2/restaurante/criar_prato.php");
+        $nome_prato = $_POST[nome_prato];
+        $foto = $_POST[foto];
+        $ingrediente = $_POST[ingrediente];
+        $preco = $_POST[preco];
+        
+        if(isset($nome_prato) && 
+            isset($foto)  && 
+            isset($ingrediente) && 
+            isset($preco) ){
+                criaPratoRestaurante($id_usuario, $nome_prato,$foto, $ingrediente, $preco );
+                header("Location: /restaurante/criar_prato.php");
         }
     }
     
-    if(temRestaurante($_SESSION[id_usuario])){
-        header("Location: /v2/restaurante/criar_prato.php");
+    if(!temRestaurante($_SESSION[id_usuario])){
+        header("Location: /restaurante/index.php");
     }
-    
-    $cnpj = $_POST[cnpj];
-    $nome = $_POST["nome"];
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
-    if(!isset($_SESSION[email])){
-        if($nome!=null && $email !=null && $senha!=null){
-            cadastraUsuario($email, $senha, $nome);
-            
-        }
-        else{
-            header("Location: /v2/login.php");
-        }
-    }
-    ?>
+?>
 </head>
 <body class="bg">
 	<?php 
-		include("../menu.php");
+		include("menu.php");
 	?>
 <!-- logo -->
 	<div class="agileinfo_logo">
 		<div class="agile_container">
-			<h1><a href="#"><img src="images/logo.png" class="logo"/>MarmitAPP</a></h1>
+			<h1><a href="#"><img src="../images/logo.png" class="logo"/>MarmitAPP</a></h1>
 		</div>
 	</div>
 <!-- //logo -->
@@ -103,53 +87,69 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 
 	<div class="menu">
-		<div class="container">	
-			<h3 class="agileits_head w3_agileits_head">Criar seu restaurante<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+		<div class="container">
+		    <h3 class="agileits_head w3_agileits_head">Seus pratos<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			<div class="agileinfo_sandwiches">
+				<?php
+                    $id_restaurante = $_GET["restaurante"];
+                    foreach (pratosPorRestaurante($id_usuario) as $prato) {
+                ?>
+                    	<div class="agile_team_grid">
+    						<div class="wthree_sandwich_grid">
+    							<h4><?php echo $prato[nome]?>--- <span>R$: <?php echo $prato[preco]?></span></h4>
+    							<p>
+    							<?php
+    								$lista_ingredientes = explode(";",$prato[ingredientes]);
+    								foreach ($lista_ingredientes as $ingrediente){
+    									echo $ingrediente;
+    									echo "<br/>";
+    								}
+    							?>
+    							</p>
+    						</div>
+							
+						</div>
+                <?php
+                    }
+                ?>
+				<div class="clearfix"> </div>
+			</div>
 			
-			
-			
-			<form class="form-horizontal" action="index.php" method="post">
+			<h3 class="agileits_head w3_agileits_head">Crie um novo prato<i class="fa fa-cutlery" aria-hidden="true"></i></h3>
+			<form class="form-horizontal" action="criar_prato.php" method="post">
                 <fieldset>
-                    <legend>Cadastrar restaurante</legend>
+                    <legend>Criar novo prato</legend>
                     <div class="form-group">
-                        <label for="nome" class="col-lg-2 control-label">Nome do restaurante: </label>
+                        <label for="nome_prato" class="col-lg-2 control-label">Nome do prato: </label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="RESTAURANTE PONTO COM">
+                            <input type="text" class="form-control" id="nome_prato" name="nome_prato" placeholder="Marmita de contra filé">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="cnpj" class="col-lg-2 control-label">Cnpj: </label>
+                        <label for="ingrediente" class="col-lg-2 control-label">Ingredientes: </label>
                         <div class="col-lg-10">
-                            <input type="number" class="form-control" id="cnpj" name="cnpj" placeholder="85834723000149">
+                            <input type="text" class="form-control" id="ingrediente" name="ingrediente" placeholder="Arroz, feijão, batata frita">
                         </div>
                     </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="come_local" value="1">Pode comer no local
-                        </label>
+                    
+                    <div class="form-group">
+                        <label for="foto" class="col-lg-2 control-label">Foto: </label>
+                        <div class="col-lg-10">
+                            <input type="file" class="form-control" id="foto" name="foto" placeholder="Arroz, feijão, batata frita">
+                        </div>
                     </div>
                     
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="entrega_meio" value="1">Pode entregar em algum outro lugar
-                        </label>
+                    <div class="form-group">
+                        <label for="preco" class="col-lg-2 control-label">Preço: </label>
+                        <div class="col-lg-10">
+                            <input type="number" class="form-control" id="preco" name="preco" placeholder="4,50">
+                        </div>
                     </div>
                     
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="entrega_fim" value="1">Pode entregar na casa
-                        </label>
-                    </div>
-                    
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="aceita_cartao" value="1">Aceita cartão<br>
-                        </label>
-                    </div>
                     
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
-                            <button value="Cadastrar" name='submit' type="submit" class="btn btn-primary">Cadastrar</button>
+                            <button value="Cadastrar" name='submit' type="submit" class="btn btn-primary">Criar</button>
                         </div>
                     </div>
                 </fieldset>

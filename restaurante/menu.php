@@ -3,14 +3,10 @@
 		<div class="overlay"></div>
 		<div class="mobile-side-menu">
 			<ul>
-				<li class="active"><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>Cliente </a></li>
-				<li><a href="historico.php"><i class="fa fa-compass" aria-hidden="true"></i>Historico de pedidos</a></li>
-				<li><a href="configuracoes.php"><i class="fa fa-picture-o" aria-hidden="true"></i>Configurações</a></li>
-				<li><a href="#"><i class="fa fa-users" aria-hidden="true"></i>Our Chef</a></li>
-				<li><a href="#"><i class="fa fa-dashcube" aria-hidden="true"></i>Short Codes</a></li>
-				<li><a href="#"><i class="fa fa-random" aria-hidden="true"></i>Web Icons</a></li>
-				<li><a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Location</a></li>
-				<li class="active"><a href="/v2/restaurante"><i class="fa fa-home" aria-hidden="true"></i>Restaurante </a></li>
+				<li class="active"><a href="../index.php"><i class="fa fa-home" aria-hidden="true"></i>Cliente </a></li>
+				<li><a href="#"><i class="fa fa-compass" aria-hidden="true"></i>Historico de pedidos</a></li>
+				<li><a href="#"><i class="fa fa-picture-o" aria-hidden="true"></i>Configurações</a></li>
+				<li class="active"><a href="/restaurante"><i class="fa fa-home" aria-hidden="true"></i>Restaurante </a></li>
 				<?php
 				    if(temRestaurante($_SESSION[id_usuario])){
 				        
@@ -34,7 +30,7 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="/v2/js/slide-from-top.js"></script> 
+	<script type="text/javascript" src="/js/slide-from-top.js"></script> 
 	<script type="text/javascript">
       $(document).ready(function() {
          $('.mobile-side-menu').slideFromTop({

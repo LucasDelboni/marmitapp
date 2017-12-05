@@ -30,7 +30,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //web-fonts -->
 <?php
 	//include('../queries.php');
-	include('../valida_session.php');
+	include('valida_session.php');
 	$id_restaurante = $_GET[restaurante];
 ?>
 </head>

@@ -31,7 +31,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="//fonts.googleapis.com/css?family=Bitter:400,400i,700&subset=latin-ext" rel="stylesheet">
 <!-- //web-fonts -->
 <?php
-include('../valida_session.php');
+include('valida_session.php');
 $id_restaurante= $_GET[restaurante];
 
 
@@ -148,7 +148,7 @@ $id_restaurante= $_GET[restaurante];
 			
 			<?php
 				if (!empty($_POST[nota])) {
-					echo "vai inserir comentario";
+					echo "comentário adicionado";
 					$comentario = $_POST[comentario];
 					$nota=$_POST[nota];
 					insereComentarioNota($_SESSION[id_usuario], $id_restaurante, $comentario, $nota);
